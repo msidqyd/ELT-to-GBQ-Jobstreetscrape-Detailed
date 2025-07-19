@@ -7,13 +7,13 @@ This project implements a scalable ELT (Extract, Load, Transform) pipeline using
 This pipeline automates the collection and transformation of job data for analytical use cases. It uses parameterized Airflow DAGs to orchestrate scraping, ingestion, transformation, and gold-layer aggregation. It is designed to support both full and incremental loads with modular DAGs and multithreaded web scraping.
 
 ## Architecture
-
+<img width="1988" height="538" alt="image" src="https://github.com/user-attachments/assets/a4e22911-c7e7-426c-bc14-f739028dd863" />
+<img width="1285" height="132" alt="image" src="https://github.com/user-attachments/assets/9433fa7f-0760-4e68-a28a-ed478ef94cf9" />
 1. Main DAG triggers 4 child DAGs in sequence:
    - Scrape & Ingest DAG
    - Load DAG (into Bronze layer)
    - Transform DAG (to Silver layer)
    - Gold Aggregation DAG (dimension and fact tables)
-
 2. Job data is scraped using Selenium and saved in CSV/JSON format.
 3. Data is ingested into BigQuery tables in a structured way.
 4. Gold tables include word frequency metrics and dimensional modeling.
@@ -27,25 +27,19 @@ This pipeline automates the collection and transformation of job data for analyt
 
 
 ## Configuration
-
+<img width="1530" height="444" alt="image" src="https://github.com/user-attachments/assets/39ba383f-9a4d-4c61-9ac7-403e9655f0da" />
 Parameters are configurable in the `params` block:
 
-- source_data: source folder (e.g. Source_Data_Jobstreet_Indonesia)
-- table_date: target partition date
+- table_date: target table with date
 - load_type: "full" or "incremental"
-- run_scrape: "run scrape" or "skip scrape"
 - source_type: CSV or JSON
 
 These parameters can be set in the main DAG or overridden at runtime.
 
-## Gold Layer Outputs
 
-- dim_company: unique companies
-- dim_location: unique locations and countries
-- dim_role: unique job roles
-- dim_job_detail: job description and work type
-- fact_job_posting: core fact table with dimensional keys and salary range
-- word_frequency: top 300 most common meaningful words per job description, counted once per job
+## Gold Layer Outputs
+- jobstreetscrape_singapore_detailed : clean table at silver layer.
+- word_frequency: top 300 most common meaningful words per job description, counted once per job.
 
 ## Stack
 
@@ -58,7 +52,14 @@ These parameters can be set in the main DAG or overridden at runtime.
 ## Example Use Cases
 
 - Analyze job postings across roles and locations
+  <img width="725" height="545" alt="image" src="https://github.com/user-attachments/assets/ca322573-bd69-4b8b-81d5-92cde0e32e94" />
+  
 - Monitor keyword trends in job descriptions
+  <img width="813" height="614" alt="image" src="https://github.com/user-attachments/assets/fbbbbb9f-6932-4e9a-9444-bb5e0dcb21b9" />
+- Updated job list for job seeker
+  <img width="778" height="574" alt="image" src="https://github.com/user-attachments/assets/7430f4f0-be8e-48ac-8c16-ce9f22fc1a9f" />
+ 
+
 - Build dashboards with salary distribution and job demand
 - Feed data into machine learning models for job classification or recommendations
 
