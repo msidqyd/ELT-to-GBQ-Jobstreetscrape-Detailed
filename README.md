@@ -8,15 +8,18 @@ This pipeline automates the collection and transformation of job data for analyt
 
 ## Architecture
 <img width="1988" height="538" alt="image" src="https://github.com/user-attachments/assets/a4e22911-c7e7-426c-bc14-f739028dd863" />
+
+### DAG Graph
 <img width="1285" height="132" alt="image" src="https://github.com/user-attachments/assets/9433fa7f-0760-4e68-a28a-ed478ef94cf9" />
-1. Main DAG triggers 4 child DAGs in sequence:
-   - Scrape & Ingest DAG
-   - Load DAG (into Bronze layer)
-   - Transform DAG (to Silver layer)
-   - Gold Aggregation DAG (dimension and fact tables)
-2. Job data is scraped using Selenium and saved in CSV/JSON format.
-3. Data is ingested into BigQuery tables in a structured way.
-4. Gold tables include word frequency metrics and dimensional modeling.
+Main DAG triggers 4 child DAGs in sequence:
+   
+- Scrape & Ingest DAG
+- Load DAG (into Bronze layer)
+- Transform DAG (to Silver layer)
+- Gold Aggregation DAG (dimension and fact tables)
+1. Job data is scraped using Selenium and saved in CSV/JSON format.
+2. Data is ingested into BigQuery tables in a structured way.
+3. Gold tables include word frequency metrics and dimensional modeling.
 
 ## Key Features
 
